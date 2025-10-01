@@ -1,6 +1,14 @@
 #include <iostream>
 using namespace std;
 
+/* INSTRUCTIONS:
+Refactor this code. The code currently is not modular at all; important code that could be reused is not contained in functions.
+
+Rewrite the code such that it leverages functions to perform these linked list operations: adding a node to the front; adding a node to the tail;
+deleting a node; inserting a node; and deleting the entire linked list.
+
+Don't forget that the coding conventions for this course require using function prototypes. */
+
 const int SIZE = 7;  
 
 struct Node {
