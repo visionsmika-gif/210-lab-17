@@ -60,9 +60,11 @@ int main() {
     return 0;
 }
 
-// getUserEntry() displays the linked list to the user and asks the user to choose a node.
-// args: a message to display, the linked list's head
-// returns: 
+// getUserEntry() prompts the user to select a node from a displayed linked list.
+// args:
+    // msg - the message to display to the user
+    // head - a pointer to the linked list's head
+// returns: the integer entered by the user
 int getUserEntry(const string& msg, Node* head) {
     int entry;
     cout << msg << endl;
@@ -72,6 +74,10 @@ int getUserEntry(const string& msg, Node* head) {
     return entry;
 }
 
+// output() displays the linked list to the user.
+// args:
+    // head - a pointer to the linked list's head
+// returns: void
 void output(Node * hd) {
     if (!hd) {
         cout << "Empty list.\n";
@@ -88,7 +94,7 @@ void output(Node * hd) {
 
 // createLinkedList() creates a linked list of size SIZE with random numbers 0-99.
 // args: none
-// returns: a pointer to the head of the linked list
+// returns: a pointer to the linked list's head
 Node* createLinkedList() {
     Node* head = nullptr;
     // create a linked list of size SIZE with random numbers 0-99
@@ -111,6 +117,12 @@ Node* createLinkedList() {
     return head;
 }
 
+// insertNode() inserts a node at a certain position in the linked list.
+// args:
+    // head - a pointer to the linked list's head
+    // position - the position to insert the node at
+    // newVal - the inserted node's value
+// returns: void
 void insertNode(Node* &head, int position, float newVal) {
     Node* current = head;
     Node* prev = head;
@@ -128,20 +140,31 @@ void insertNode(Node* &head, int position, float newVal) {
     prev->next = newnode;
 }
 
-// Add a node to the front
+// addNodeToFront() adds a node to the front of the linked list.
+// args:
+    // head - a pointer to the linked list's head
+    // newVal - the added node's value
+// returns: void
 void addNodeToFront(Node* &head, float newVal) {
+    // Create a new node and make it the head of the linked list
     Node* newNode = new Node;
     newNode->value = newVal;
     newNode->next = head;
     head = newNode;
 }
 
-// Add node to tail
+// addNodeToTail() adds a node to the tail of the linked list.
+// args:
+    // head - a pointer to the linked list's head
+    // newVal - the added node's value
+// returns: void
 void addNodeToTail(Node* &head, float newVal) {
+    // Create a new node
     Node* newNode = new Node;
     newNode->value = newVal;
     newNode->next = nullptr;
 
+    // Traverse the linked list to the tail and add the node there
     Node* current = head;
     while (current->next != nullptr) {
         current = current->next;
@@ -149,16 +172,7 @@ void addNodeToTail(Node* &head, float newVal) {
     current->next = newNode;
 }
 
-void deleteLinkedList(Node* &head) {
-    Node* current = head;
-    while (current) {
-        head = current->next;
-        delete current;
-        current = head;
-    }
-    head = nullptr;
-}
-
+// deleteNode() deletes a node at
 void deleteNode(Node*& head, int position) {
     if (position == 1) { // Added an if branch to handle deleting the head
         Node* oldHead = head;
@@ -182,4 +196,18 @@ void deleteNode(Node*& head, int position) {
         delete current;
         current = nullptr;
     }
+}
+
+// deleteLinkedList() deletes an entire linked list.
+// args:
+    // head - a pointer to the linked list's head
+// returns: void
+void deleteLinkedList(Node*& head) {
+    Node* current = head;
+    while (current) {
+        head = current->next;
+        delete current;
+        current = head;
+    }
+    head = nullptr;
 }
