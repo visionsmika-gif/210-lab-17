@@ -17,11 +17,67 @@ struct Node {
 };
 
 void output(Node *);
+Node* createLinkedList() {
+    Node* head = nullptr;
+    // create a linked list of size SIZE with random numbers 0-99
+    for (int i = 0; i < SIZE; i++) {
+        int tmp_val = rand() % 100;
+        Node* newVal = new Node;
+
+        // adds node at head
+        if (!head) { // if this is the first node, it's the new head
+            head = newVal;
+            newVal->next = nullptr;
+            newVal->value = tmp_val;
+        }
+        else { // its a second or subsequent node; place at the head
+            newVal->next = head;
+            newVal->value = tmp_val;
+            head = newVal;
+        }
+    }
+    return head;
+}
+
+void deleteNode(head) {
+    // deleting a node
+    Node* current = head;
+    cout << "Which node to delete? " << endl;
+    output(head);
+    int entry;
+    cout << "Choice --> ";
+    cin >> entry;
+
+    // traverse that many times and delete that node
+    current = head;
+    Node* prev = head;
+    for (int i = 0; i < (entry - 1); i++)
+        if (i == 0)
+            current = current->next;
+        else {
+            current = current->next;
+            prev = prev->next;
+        }
+    // at this point, delete current and reroute pointers
+    if (current) {  // checks for current to be valid before deleting the node
+        prev->next = current->next;
+        delete current;
+        current = nullptr;
+    }
+}
+
+/*
+void deleteNode
+void insertNode
+void deleteLinkedList*/
 
 int main() {
     Node *head = nullptr;
     int count = 0;
 
+    head = createLinkedList();
+
+    /*
     // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
         int tmp_val = rand() % 100;
@@ -38,7 +94,7 @@ int main() {
             newVal->value = tmp_val;
             head = newVal;
         }
-    }
+    }*/
     output(head);
 
     // deleting a node
