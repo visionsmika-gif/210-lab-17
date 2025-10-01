@@ -23,6 +23,7 @@ void insertNode(Node* &head, int position, float newVal);
 void deleteLinkedList(Node* &head);
 
 // Add a node to the front
+/*
 void addNodeToFront(Node* &head, float newVal) {
     Node* newNode = new Node;
     newNode->value = newVal;
@@ -41,41 +42,43 @@ void addNodeToTail(Node* &head, float newVal) {
     }
     current->next = newNode;
     
+}*/
+
+int getUserEntry(const string& msg, Node* head) {
+    int entry;
+    cout << msg << endl;
+    output(head);
+    cout << "Choice --> ";
+    cin >> entry;
+    return entry;
 }
 
 int main() {
     Node *head = nullptr;
     int count = 0;
+    int entry;
 
     // Create a linked list of size SIZE with random numbers 0-99
     head = createLinkedList();
     output(head);
 
     // Ask the user which node to delete
-    cout << "Which node to delete? " << endl;
-    output(head);
-    int entry;
-    cout << "Choice --> ";
-    cin >> entry;
-
+    entry = getUserEntry("Which node to delete? ", head);
+    
     // Delete the node
     deleteNode(head, entry);
     output(head);
 
     // Ask the user where to insert a node
-    cout << "After which node to insert 10000? " << endl;
-    count = 1;
-    Node* current = head;
-    while (current) {
-        cout << "[" << count++ << "] " << current->value << endl;
-        current = current->next;
-    }
-    cout << "Choice --> ";
-    cin >> entry;
+    entry = getUserEntry("After which node to insert 10000? ", head);
 
     // Insert the node
     insertNode(head, entry, 1000);
     output(head);
+
+    // Ask the user what value to add at the node's head
+    cout << "Enter a value to add to the node's head --> ";
+    cin >> entry;
 
     // Delete the entire linked list
     deleteLinkedList(head);
