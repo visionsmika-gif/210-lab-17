@@ -23,7 +23,6 @@ void insertNode(Node* &head, int position, float newVal);
 void deleteLinkedList(Node* &head);
 
 // Add a node to the front
-/*
 void addNodeToFront(Node* &head, float newVal) {
     Node* newNode = new Node;
     newNode->value = newVal;
@@ -42,7 +41,7 @@ void addNodeToTail(Node* &head, float newVal) {
     }
     current->next = newNode;
     
-}*/
+}
 
 int getUserEntry(const string& msg, Node* head) {
     int entry;
@@ -76,9 +75,16 @@ int main() {
     insertNode(head, entry, 1000);
     output(head);
 
-    // Ask the user what value to add at the node's head
-    cout << "Enter a value to add to the node's head --> ";
+    // Ask the user what value to add at the front of the linked list
+    cout << "Enter a value to add to the front of the linked list --> ";
     cin >> entry;
+    addNodeToFront(head, entry);
+    output(head);
+
+    cout << "Enter a value to add to the tail of the linked list --> ";
+    cin >> entry;
+    addNodeToTail(head, entry);
+    output(head);
 
     // Delete the entire linked list
     deleteLinkedList(head);
