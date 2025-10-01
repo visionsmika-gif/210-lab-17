@@ -1,13 +1,8 @@
+// COMSC-210 | Lab 17 | Mika Aquino
+// IDE used: Visual Studio 2022
+
 #include <iostream>
 using namespace std;
-
-/* INSTRUCTIONS:
-Refactor this code. The code currently is not modular at all; important code that could be reused is not contained in functions.
-
-Rewrite the code such that it leverages functions to perform these linked list operations: adding a node to the front; adding a node to the tail;
-deleting a node; inserting a node; and deleting the entire linked list.
-
-Don't forget that the coding conventions for this course require using function prototypes. */
 
 const int SIZE = 7;  
 
@@ -16,45 +11,21 @@ struct Node {
     Node *next;
 };
 
-void output(Node *);
+void output(Node *); // Display the linked list
+
+// createLinkedList() creates a linked list of size SIZE with random numbers 0-99.
+// args: none
+// returns: 
 Node* createLinkedList();
 void deleteNode(Node* &head, int position);
 void insertNode(Node* &head, int position, float newVal);
 void deleteLinkedList(Node* &head);
-
-// Add a node to the front
-void addNodeToFront(Node* &head, float newVal) {
-    Node* newNode = new Node;
-    newNode->value = newVal;
-    newNode->next = head;
-    head = newNode;
-}
-
-// Add node to tail
-void addNodeToTail(Node* &head, float newVal) {
-    Node* newNode = new Node;
-    newNode->value = newVal;
-
-    Node* current = head;
-    while (current->next != nullptr) {
-        current = current->next;
-    }
-    current->next = newNode;
-    
-}
-
-int getUserEntry(const string& msg, Node* head) {
-    int entry;
-    cout << msg << endl;
-    output(head);
-    cout << "Choice --> ";
-    cin >> entry;
-    return entry;
-}
+void addNodeToFront(Node* &head, float newVal);
+void addNodeToTail(Node* &head, float newVal);
+int getUserEntry(const string& msg, Node* head);
 
 int main() {
     Node *head = nullptr;
-    int count = 0;
     int entry;
 
     // Create a linked list of size SIZE with random numbers 0-99
@@ -171,6 +142,27 @@ void insertNode(Node* &head, int position, float newVal) {
     prev->next = newnode;
 }
 
+// Add a node to the front
+void addNodeToFront(Node* &head, float newVal) {
+    Node* newNode = new Node;
+    newNode->value = newVal;
+    newNode->next = head;
+    head = newNode;
+}
+
+// Add node to tail
+void addNodeToTail(Node* &head, float newVal) {
+    Node* newNode = new Node;
+    newNode->value = newVal;
+    newNode->next = nullptr;
+
+    Node* current = head;
+    while (current->next != nullptr) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
 void deleteLinkedList(Node* &head) {
     Node* current = head;
     while (current) {
@@ -179,4 +171,13 @@ void deleteLinkedList(Node* &head) {
         current = head;
     }
     head = nullptr;
+}
+
+int getUserEntry(const string& msg, Node* head) {
+    int entry;
+    cout << msg << endl;
+    output(head);
+    cout << "Choice --> ";
+    cin >> entry;
+    return entry;
 }
