@@ -11,47 +11,43 @@ struct Node {
     Node *next;
 };
 
-void output(Node *); // Display the linked list
-
-// createLinkedList() creates a linked list of size SIZE with random numbers 0-99.
-// args: none
-// returns: 
+// Functions for linked list operations
 Node* createLinkedList();
 void deleteNode(Node* &head, int position);
 void insertNode(Node* &head, int position, float newVal);
-void deleteLinkedList(Node* &head);
 void addNodeToFront(Node* &head, float newVal);
 void addNodeToTail(Node* &head, float newVal);
-int getUserEntry(const string& msg, Node* head);
+void deleteLinkedList(Node*& head);
+
+// Functions for input and output
+int getUserEntry(const string& msg, Node* head); // Prompt the user to choose a node
+void output(Node*); // Display the linked list
 
 int main() {
     Node *head = nullptr;
     int entry;
 
-    // Create a linked list of size SIZE with random numbers 0-99
+    // Create a linked list
     head = createLinkedList();
     output(head);
 
-    // Ask the user which node to delete
+    // Delete a node
     entry = getUserEntry("Which node to delete? ", head);
-    
-    // Delete the node
     deleteNode(head, entry);
     output(head);
 
-    // Ask the user where to insert a node
+    // Insert a node
     entry = getUserEntry("After which node to insert 10000? ", head);
-
-    // Insert the node
-    insertNode(head, entry, 1000);
+    insertNode(head, entry, 10000);
     output(head);
 
-    // Ask the user what value to add at the front of the linked list
+    // Add a node to the front
     cout << "Enter a value to add to the front of the linked list --> ";
     cin >> entry;
     addNodeToFront(head, entry);
     output(head);
 
+    // Add a node to the tail
     cout << "Enter a value to add to the tail of the linked list --> ";
     cin >> entry;
     addNodeToTail(head, entry);
@@ -62,6 +58,18 @@ int main() {
     output(head);
 
     return 0;
+}
+
+// getUserEntry() displays the linked list to the user and asks the user to choose a node.
+// args: a message to display, the linked list's head
+// returns: 
+int getUserEntry(const string& msg, Node* head) {
+    int entry;
+    cout << msg << endl;
+    output(head);
+    cout << "Choice --> ";
+    cin >> entry;
+    return entry;
 }
 
 void output(Node * hd) {
@@ -78,6 +86,9 @@ void output(Node * hd) {
     cout << endl;
 }
 
+// createLinkedList() creates a linked list of size SIZE with random numbers 0-99.
+// args: none
+// returns: a pointer to the head of the linked list
 Node* createLinkedList() {
     Node* head = nullptr;
     // create a linked list of size SIZE with random numbers 0-99
@@ -98,31 +109,6 @@ Node* createLinkedList() {
         }
     }
     return head;
-}
-
-void deleteNode(Node* &head, int position) {
-    if (position == 1) { // Added an if branch to handle deleting the head
-        Node* oldHead = head;
-        head = head->next;
-        delete oldHead;
-        return;
-    }
-    Node* current = head;
-    Node* prev = head;
-    // traverse that many times and delete that node
-    for (int i = 0; i < (position - 1); i++)
-        if (i == 0)
-            current = current->next;
-        else {
-            current = current->next;
-            prev = prev->next;
-        }
-    // at this point, delete current and reroute pointers
-    if (current) {  // checks for current to be valid before deleting the node
-        prev->next = current->next;
-        delete current;
-        current = nullptr;
-    }
 }
 
 void insertNode(Node* &head, int position, float newVal) {
@@ -173,11 +159,27 @@ void deleteLinkedList(Node* &head) {
     head = nullptr;
 }
 
-int getUserEntry(const string& msg, Node* head) {
-    int entry;
-    cout << msg << endl;
-    output(head);
-    cout << "Choice --> ";
-    cin >> entry;
-    return entry;
+void deleteNode(Node*& head, int position) {
+    if (position == 1) { // Added an if branch to handle deleting the head
+        Node* oldHead = head;
+        head = head->next;
+        delete oldHead;
+        return;
+    }
+    Node* current = head;
+    Node* prev = head;
+    // traverse that many times and delete that node
+    for (int i = 0; i < (position - 1); i++)
+        if (i == 0)
+            current = current->next;
+        else {
+            current = current->next;
+            prev = prev->next;
+        }
+    // at this point, delete current and reroute pointers
+    if (current) {  // checks for current to be valid before deleting the node
+        prev->next = current->next;
+        delete current;
+        current = nullptr;
+    }
 }
