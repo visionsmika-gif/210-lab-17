@@ -39,19 +39,11 @@ Node* createLinkedList() {
     return head;
 }
 
-void deleteNode(head) {
-    // deleting a node
+void deleteNode(Node* &head, int position) {
     Node* current = head;
-    cout << "Which node to delete? " << endl;
-    output(head);
-    int entry;
-    cout << "Choice --> ";
-    cin >> entry;
-
-    // traverse that many times and delete that node
-    current = head;
     Node* prev = head;
-    for (int i = 0; i < (entry - 1); i++)
+    // traverse that many times and delete that node
+    for (int i = 0; i < (position - 1); i++)
         if (i == 0)
             current = current->next;
         else {
@@ -64,6 +56,24 @@ void deleteNode(head) {
         delete current;
         current = nullptr;
     }
+}
+
+void insertNode(Node* &head, int position) {
+    Node* current = head;
+    Node* prev = head;
+    for (int i = 0; i < (position); i++)
+        if (i == 0)
+            current = current->next;
+        else {
+            current = current->next;
+            prev = prev->next;
+        }
+    //at this point, insert a node between prev and current
+    Node* newnode = new Node;
+    newnode->value = 10000;
+    newnode->next = current;
+    prev->next = newnode;
+    output(head);
 }
 
 /*
@@ -98,13 +108,14 @@ int main() {
     output(head);
 
     // deleting a node
-    Node * current = head;
+    //Node * current = head;
     cout << "Which node to delete? " << endl;
     output(head);
     int entry;
     cout << "Choice --> ";
     cin >> entry;
 
+    /*
     // traverse that many times and delete that node
     current = head;
     Node *prev = head;
@@ -120,10 +131,13 @@ int main() {
         prev->next = current->next;
         delete current;
         current = nullptr;
-    }
+    }*/
+    deleteNode(head, entry);
     output(head);
 
+
     // insert a node
+    
     current = head;
     cout << "After which node to insert 10000? " << endl;
     count = 1;
@@ -134,6 +148,7 @@ int main() {
     cout << "Choice --> ";
     cin >> entry;
 
+    /*
     current = head;
     prev = head;
     for (int i = 0; i < (entry); i++)
@@ -148,7 +163,7 @@ int main() {
     newnode->value = 10000;
     newnode->next = current;
     prev->next = newnode;
-    output(head);
+    output(head);*/
 
     // deleting the linked list
     current = head;
