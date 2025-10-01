@@ -25,15 +25,22 @@ void deleteLinkedList(Node* &head);
 // Add a node to the front
 void addNodeToFront(Node* &head, float newVal) {
     Node* newNode = new Node;
-    if (!head) { // Handles if list is empty
-        head = newNode;
-        newNode->next = nullptr;
-        newNode->value = newVal;
+    newNode->value = newVal;
+    newNode->next = head;
+    head = newNode;
+}
+
+// Add node to tail
+void addNodeToTail(Node* &head, float newVal) {
+    Node* newNode = new Node;
+    newNode->value = newVal;
+
+    Node* current = head;
+    while (current->next != nullptr) {
+        current = current->next;
     }
-    else {
-        newNode->next = head;
-        head = newNode;
-    }
+    current->next = newNode;
+    
 }
 
 int main() {
